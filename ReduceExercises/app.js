@@ -7,11 +7,11 @@ Examples:
 */
 
 function extractValue(arr, key) {
-    return arr.reduce(function(accumulator,currentValue){
-        accumulator.push(currentValue[key]);
-        return accumulator;
-
-    }, []);
+    return arr.reduce(function(acc,curVal){
+        acc.push(curVal[key]) 
+        return acc;
+    }, [] )
+  
 }
 
 /*
@@ -42,22 +42,43 @@ Examples:
 //     }, {});
 // }
 
+//Version1:
 function vowelCount(str) {
-    const vowels ='aeiou'     
-    return str.split('').reduce(function(accumulator,currentValue){
-        let lowerCase=currentValue.toLowerCase()
-        if(vowels.indexOf(currentValue) !==-1){
-        if(accumulator[lowerCase]){
-            accumulator[lowerCase] ++;
-        }
+    let vowels ="aeiou";        
+    return str.split('').reduce(function(acc,curVal){
+        let lowercurVal=curVal.toLowerCase();
+        if(vowels.indexOf(lowercurVal) !== -1){
+            if(acc[lowercurVal]){
+            acc[lowercurVal] ++;             
+            }        
         else{
-            accumulator[lowerCase] =1
+            acc[lowercurVal] =1;
         }
     }
-        return accumulator;
+       return acc; 
+      
 
-    }, {});
+    }, {})
 }
+
+//Version2 : (without checks for lower case for curVal)
+// function vowelCount2(str) {
+//     let vowels ="aeiou";     
+//     return str.split('').reduce(function(acc,curVal){
+//         if(vowels.indexOf(curVal) !== -1){
+//             if(acc[curVal]){
+//             acc[curVal] ++;             
+//             }        
+//         else{
+//             acc[curVal] =1;
+//         }
+//     }
+//        return acc; 
+      
+
+//     }, {})
+// }  
+
 
 
 
@@ -77,12 +98,14 @@ Examples:
 */
 
 function addKeyAndValue(arr, key, value) {
-    return arr.reduce(function(accumulator,curValue,curIndex){
-        accumulator[curIndex][key]=value;
+    return arr.reduce(function(accumulator,curVal,curIndx){
+        accumulator[curIndx][key] = value;         
         return accumulator;
-
     }, arr);
+
 }
+
+
 
 /*
 Write a function called partition which accepts an array and a callback and returns an array with two arrays inside of it. 
@@ -110,13 +133,15 @@ Examples:
 */
 
 function partition(arr, callback) {
-    return arr.reduce(function(accumulator,curValue){
-       if(callback(curValue)) {
-        accumulator[0].push(curValue);
-       }
-       else{
-        accumulator[1].push(curValue);
-       }
-       return accumulator;
-    }, [[],[]])
+    return arr.reduce(function(accumulator,curVal){
+        if(callback(curVal)){
+            accumulator[0].push(curVal);
+        }
+        else{
+            accumulator[1].push(curVal);
+        }
+        return accumulator;     
+    }, [ [], [] ]);
+ 
+
 }
